@@ -1,0 +1,28 @@
+﻿{
+  "actors": [
+    {
+      "id": 1,
+      "name": "Bob",
+      "daySalary": 23.22
+    },
+    {
+      "id": 2,
+      "name": "Mark",
+      "daySalary": 13.22
+    }
+  ],
+  "scenes": [
+    {
+      "id": 1,
+      "participantId": [ 1, 2 ]
+    },
+    {
+      "id": 2,
+      "participantId": [ 2 ]
+    },
+    {
+      "id": 3,
+      "participantId": [ 1 ]
+    }
+  ]
+}

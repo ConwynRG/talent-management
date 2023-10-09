@@ -6,7 +6,8 @@
         {
             var talentManager = new TalentManager();
 
-            talentManager.Start();
+            talentManager.Initialize();
+            talentManager.Start(iterationCount: 100);
         }
     }
 }

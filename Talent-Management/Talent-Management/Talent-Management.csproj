@@ -10,6 +10,15 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Input\bigTest.json">
+      <SubType>Component</SubType>
+    </None>
+    <None Update="Input\simpleTest.json">
+      <SubType>Component</SubType>
+    </None>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

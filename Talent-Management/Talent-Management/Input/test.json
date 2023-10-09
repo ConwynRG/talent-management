@@ -1,0 +1,55 @@
+﻿{
+  "actors": [
+    {
+      "id": 1,
+      "name": "Bob",
+      "daySalary": 23.88
+    },
+    {
+      "id": 2,
+      "name": "Mark",
+      "daySalary": 13.71
+    },
+    {
+      "id": 3,
+      "name": "Margo",
+      "daySalary": 33.27
+    },
+    {
+      "id": 4,
+      "name": "Catherine",
+      "daySalary": 19.32
+    },
+    {
+      "id": 5,
+      "name": "John",
+      "daySalary": 20.32
+    }
+  ],
+  "scenes": [
+    {
+      "id": 1,
+      "participantId": [ 1, 2, 3]
+    },
+    {
+      "id": 2,
+      "participantId": [ 2, 3, 4 ]
+    },
+    {
+      "id": 3,
+      "participantId": [ 1, 4, 5 ]
+    },
+    {
+      "id": 4,
+      "participantId": [ 1, 4, 5 ]
+    },
+    {
+      "id": 5,
+      "participantId": [ 5 ]
+    },
+    {
+      "id": 6,
+      "participantId": [ 2, 3 ]
+    }
+  ]
+}

@@ -7,7 +7,7 @@ namespace Talent_Management.Utilities
 {
     public class MovieSerializer
     {
-        private readonly string inputLocation;// "\\Input\\input.json";
+        private readonly string inputLocation;
         
         public MovieSerializer(string inputLocation)
         {

@@ -8,11 +8,11 @@ namespace Talent_Management
 {
     public class TalentManager
     {
-        private readonly string inputLocation = "\\Input\\input.json";
+        private readonly string inputLocation = "\\Input\\simpleTest.json";
         private readonly MovieSerializer _movieSerializer;
         private readonly Random _randomizer = new Random();
 
-        private readonly int _queueLength = 10;
+        
         private readonly Queue<double> _thresholdPriceQueue = new();
 
         private double _bestPrice;
@@ -20,7 +20,8 @@ namespace Talent_Management
 
         private List<Actor> _actors;
         private List<Scene> _currentScene;
-        private double _currentPrice;
+
+        private int _queueLength = 20;
 
         public TalentManager()
         {
@@ -32,24 +33,28 @@ namespace Talent_Management
             var movie = _movieSerializer.DeserializeMovie();
             var initialPrice = CalculateSallary(movie.Actors, movie.Scenes);
 
-            for(int i = 0; i < _queueLength; i++)
+            _queueLength = (movie.Actors.Count + movie.Scenes.Count)/2;
+
+            for (int i = 0; i < _queueLength; i++)
             {
                 _thresholdPriceQueue.Enqueue(initialPrice);
             }
 
             _actors = movie.Actors;
             _currentScene = movie.Scenes;
-            _currentPrice = initialPrice;
 
             _bestPrice = initialPrice;
             _bestSceneSequence = movie.Scenes;
         }
 
-        public void Start(int iterationCount)
+        public void Start()
         {
-            int i = 0;
+            int best_iterator = 0;
+            int change_iterator = 0;
+            int iterationWithoutBest = _currentScene.Count * _actors.Count * 2000;
+            int iterationWithoutChange = (_currentScene.Count + _actors.Count);
 
-            while (i < iterationCount)
+            while (best_iterator < iterationWithoutBest && change_iterator < iterationWithoutChange)
             {
                 var newSceneSequence = ChangeSceneOrder(_currentScene);
                 var newSceneSequencePrice = CalculateSallary(_actors, newSceneSequence);
@@ -60,6 +65,8 @@ namespace Talent_Management
                 {
                     _bestPrice = newSceneSequencePrice;
                     _bestSceneSequence = newSceneSequence;
+
+                    best_iterator = 0;
                 }
 
                 var currentThreshold = _thresholdPriceQueue.Dequeue();
@@ -67,12 +74,14 @@ namespace Talent_Management
                 if (newSceneSequencePrice < currentThreshold)
                 {
                     _currentScene = newSceneSequence;
+                    change_iterator = 0;
                 }
 
-                i++;
+                best_iterator++;
+                change_iterator++;
             }
 
-            Console.WriteLine($"Best Price: {_bestPrice}");
+            Console.WriteLine($"Best Price: {Math.Round(_bestPrice, 2)}");
             Console.Write($"Best Sequence: ");
 
             _bestSceneSequence.ForEach(scene => Console.Write($"{scene.Id} "));
